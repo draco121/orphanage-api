@@ -14,7 +14,7 @@ namespace orphanage_api.Controllers
     public class OrphanageController : ApiController
     {
       [Route("api/orphanage/register")]
-       public IHttpActionResult Postregister([FromBody] orphanageRegistration1 op )
+       public IHttpActionResult Postregister(orphanageRegistration1 op )
         {
             using (var x = new ActionLearningEntities())
             {
@@ -43,10 +43,10 @@ namespace orphanage_api.Controllers
         public IHttpActionResult PostLogin(orphanageRegistration1 obj)
         {
             orphanageRegistration1 result = new orphanageRegistration1();
-            using (var x = new ActionLearningEntities())
-            {
+            var x = new ActionLearningEntities();
+
                 // x.Configuration.ProxyCreationEnabled = false;
-                result = x.orphanageRegistration1.Where(a => a.oRegistrationNum.Equals(obj.oRegistrationNum) && a.password.Equals(obj.password) ).FirstOrDefault();
+            result = x.orphanageRegistration1.Where(a => a.oRegistrationNum.Equals(obj.oRegistrationNum) && a.password.Equals(obj.password)).FirstOrDefault();
                 //return Ok(result);
 
                 if (result != null)
@@ -57,7 +57,7 @@ namespace orphanage_api.Controllers
                 {
                     return NotFound();
                 }
-            }
+            
         }
 
         [Route("api/orphanage/allorphanage")]
@@ -116,7 +116,7 @@ namespace orphanage_api.Controllers
             }
         }
 
-        [Route("api/orphanage/add/child")]
+        [Route("api/orphanage/add/addchild")]
         public IHttpActionResult PostChildren(childRegisteration obj)
         {
            using (var x = new ActionLearningEntities())
@@ -132,6 +132,24 @@ namespace orphanage_api.Controllers
                 }
             }
         }
+        
+        //[Route("api/orphanage/addRequirement")]
+        //public IHttpActionResult PostRequirements(reqTable obj)
+        //{
+        //    using (var x = new ActionLearningEntities())
+        //    {
+        //        try
+        //        {
+        //            x.reqTables.Add(obj);
+        //            x.SaveChanges();
+        //            return Ok();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            return InternalServerError(e);
+        //        }
+        //    }
+        //}
 
     }
 }
