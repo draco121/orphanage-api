@@ -10,20 +10,22 @@ namespace orphanage_api.Controllers
 {
     public class RequirementController : ApiController
     {
-        //[Route("api/orphanage/addRequirement")]
-        public IHttpActionResult PostRequirements(reqTable obj)
+        [Route("api/orphanage/addRequirement")]
+        public IHttpActionResult PostRequirement(reqTable obj)
         {
             using (var x = new ActionLearningEntities())
             {
                 try
                 {
+                    obj.Id = Guid.NewGuid().ToString();
+                    obj.date = DateTime.Now;
                     x.reqTables.Add(obj);
                     x.SaveChanges();
-                    return Ok();
+                    return Ok("requirement added");
                 }
                 catch (Exception e)
                 {
-                    return InternalServerError(e);
+                    return Ok(e.ToString());
                 }
             }
         }

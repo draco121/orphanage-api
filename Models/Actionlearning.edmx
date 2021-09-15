@@ -37,11 +37,13 @@
         </EntityType>
         <EntityType Name="reqTable">
           <Key>
-            <PropertyRef Name="rId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="rId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="requirementName" Type="nvarchar" MaxLength="50" />
-          <Property Name="requirementStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="oId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_childRegisteration_orphanageRegistration1">
@@ -56,18 +58,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_reqTable_orphanageRegistration1">
-          <End Role="orphanageRegistration1" Type="Self.orphanageRegistration1" Multiplicity="1" />
-          <End Role="reqTable" Type="Self.reqTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="orphanageRegistration1">
-              <PropertyRef Name="oId" />
-            </Principal>
-            <Dependent Role="reqTable">
-              <PropertyRef Name="oId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ActionLearningModelStoreContainer">
           <EntitySet Name="childRegisteration" EntityType="Self.childRegisteration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orphanageRegistration1" EntityType="Self.orphanageRegistration1" Schema="dbo" store:Type="Tables" />
@@ -75,10 +65,6 @@
           <AssociationSet Name="FK_childRegisteration_orphanageRegistration1" Association="Self.FK_childRegisteration_orphanageRegistration1">
             <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
             <End Role="childRegisteration" EntitySet="childRegisteration" />
-          </AssociationSet>
-          <AssociationSet Name="FK_reqTable_orphanageRegistration1" Association="Self.FK_reqTable_orphanageRegistration1">
-            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
-            <End Role="reqTable" EntitySet="reqTable" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -117,17 +103,17 @@
           <Property Name="phoneNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="childRegisterations" Relationship="Self.FK_childRegisteration_orphanageRegistration1" FromRole="orphanageRegistration1" ToRole="childRegisteration" />
-          <NavigationProperty Name="reqTables" Relationship="Self.FK_reqTable_orphanageRegistration1" FromRole="orphanageRegistration1" ToRole="reqTable" />
         </EntityType>
         <EntityType Name="reqTable">
           <Key>
-            <PropertyRef Name="rId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="rId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="requirementName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="requirementStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="oId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="orphanageRegistration1" Relationship="Self.FK_reqTable_orphanageRegistration1" FromRole="reqTable" ToRole="orphanageRegistration1" />
         </EntityType>
         <Association Name="FK_childRegisteration_orphanageRegistration1">
           <End Role="orphanageRegistration1" Type="Self.orphanageRegistration1" Multiplicity="0..1" />
@@ -141,18 +127,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_reqTable_orphanageRegistration1">
-          <End Role="orphanageRegistration1" Type="Self.orphanageRegistration1" Multiplicity="1" />
-          <End Role="reqTable" Type="Self.reqTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="orphanageRegistration1">
-              <PropertyRef Name="oId" />
-            </Principal>
-            <Dependent Role="reqTable">
-              <PropertyRef Name="oId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ActionLearningEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="childRegisterations" EntityType="Self.childRegisteration" />
           <EntitySet Name="orphanageRegistration1" EntityType="Self.orphanageRegistration1" />
@@ -160,10 +134,6 @@
           <AssociationSet Name="FK_childRegisteration_orphanageRegistration1" Association="Self.FK_childRegisteration_orphanageRegistration1">
             <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
             <End Role="childRegisteration" EntitySet="childRegisterations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_reqTable_orphanageRegistration1" Association="Self.FK_reqTable_orphanageRegistration1">
-            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
-            <End Role="reqTable" EntitySet="reqTables" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -207,9 +177,11 @@
           <EntitySetMapping Name="reqTables">
             <EntityTypeMapping TypeName="ActionLearningModel.reqTable">
               <MappingFragment StoreEntitySet="reqTable">
-                <ScalarProperty Name="rId" ColumnName="rId" />
-                <ScalarProperty Name="requirementName" ColumnName="requirementName" />
-                <ScalarProperty Name="requirementStatus" ColumnName="requirementStatus" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="oId" ColumnName="oId" />
               </MappingFragment>
             </EntityTypeMapping>

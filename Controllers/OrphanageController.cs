@@ -40,7 +40,7 @@ namespace orphanage_api.Controllers
 
         }
         [Route("api/orphanage/login")]
-        public IHttpActionResult PostLogin(orphanageRegistration1 obj)
+        public IHttpActionResult PostLogin(LoginModel obj)
         {
             orphanageRegistration1 result = new orphanageRegistration1();
             var x = new ActionLearningEntities();
@@ -132,24 +132,24 @@ namespace orphanage_api.Controllers
                 }
             }
         }
-        
-        //[Route("api/orphanage/addRequirement")]
-        //public IHttpActionResult PostRequirements(reqTable obj)
-        //{
-        //    using (var x = new ActionLearningEntities())
-        //    {
-        //        try
-        //        {
-        //            x.reqTables.Add(obj);
-        //            x.SaveChanges();
-        //            return Ok();
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            return InternalServerError(e);
-        //        }
-        //    }
-        //}
+
+        /*[Route("api/orphanage/addRequirement")]
+        public IHttpActionResult PostRequirements(reqTable obj)
+        {
+            using (var x = new ActionLearningEntities())
+            {
+                try
+                {
+                    x.reqTables.Add(obj);
+                    x.SaveChanges();
+                    return Ok();
+                }
+                catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
+            }
+        /}*/
 
     }
 }

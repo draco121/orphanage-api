@@ -14,11 +14,11 @@ namespace orphanage_api.Models
     
     public partial class reqTable
     {
-        public int rId { get; set; }
-        public string requirementName { get; set; }
-        public string requirementStatus { get; set; }
+        public string Id { get; set; }
+        public int amount { get; set; }
+        public string description { get; set; }
+        public string status { get; set; }
+        public System.DateTime date { get; set; }
         public int oId { get; set; }
-    
-        public virtual orphanageRegistration1 orphanageRegistration1 { get; set; }
     }
 }
