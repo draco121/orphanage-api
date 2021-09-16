@@ -40,23 +40,30 @@ namespace orphanage_api.Controllers
 
         }
         [Route("api/orphanage/login")]
-        public IHttpActionResult PostLogin(orphanageRegistration1 obj)
+        public IHttpActionResult PostLogin(LoginModel obj)
         {
             orphanageRegistration1 result = new orphanageRegistration1();
             var x = new ActionLearningEntities();
 
-                // x.Configuration.ProxyCreationEnabled = false;
-            result = x.orphanageRegistration1.Where(a => a.oRegistrationNum.Equals(obj.oRegistrationNum) && a.password.Equals(obj.password)).FirstOrDefault();
-                //return Ok(result);
+            // x.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+            result = x.orphanageRegistration1.Where(a => a.oRegistrationNum.Equals(obj.oRegistrationNum) && a.password.Equals(obj.Password)).FirstOrDefault();
+                            //return Ok(result);
 
-                if (result != null)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return NotFound();
-                }
+                            if (result != null)
+                            {
+                                return Ok(result);
+                            }
+                            else
+                            {
+                                return NotFound();
+                            }
+            }catch(Exception e)
+            {
+                return Ok(e.ToString());
+            }
+            
             
         }
 

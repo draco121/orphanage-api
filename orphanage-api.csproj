@@ -191,6 +191,7 @@
     <Compile Include="Models\childRegisteration.cs">
       <DependentUpon>ActionLearning.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Orphanage.cs" />
     <Compile Include="Models\orphanageRegistration1.cs">
       <DependentUpon>ActionLearning.tt</DependentUpon>

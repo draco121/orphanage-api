@@ -18,6 +18,7 @@ namespace orphanage_api.Models
         public ActionLearningEntities()
             : base("name=ActionLearningEntities")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
