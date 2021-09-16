@@ -12,12 +12,13 @@ namespace orphanage_api.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class reqTable
+    public partial class TransactionTable
     {
-        public int rId { get; set; }
-        public string requirementName { get; set; }
-        public string requirementStatus { get; set; }
+        public int tId { get; set; }
         public int oId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public decimal Amount { get; set; }
     
         public virtual orphanageRegistration1 orphanageRegistration1 { get; set; }
     }

@@ -56,17 +56,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -168,37 +162,47 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AdopterController.cs" />
+    <Compile Include="Controllers\DonorController.cs" />
+    <Compile Include="Controllers\HelpingHandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrphanageController.cs" />
+    <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\RequirementController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ActionLearning.Context.cs">
+    <Compile Include="Models\Actionlearning.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ActionLearning.Context.tt</DependentUpon>
+      <DependentUpon>Actionlearning.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ActionLearning.cs">
+    <Compile Include="Models\Actionlearning.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ActionLearning.tt</DependentUpon>
+      <DependentUpon>Actionlearning.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ActionLearning.Designer.cs">
+    <Compile Include="Models\Actionlearning.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ActionLearning.edmx</DependentUpon>
+      <DependentUpon>Actionlearning.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\childRegisteration.cs">
-      <DependentUpon>ActionLearning.tt</DependentUpon>
+      <DependentUpon>Actionlearning.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Orphanage.cs" />
     <Compile Include="Models\orphanageRegistration1.cs">
-      <DependentUpon>ActionLearning.tt</DependentUpon>
+      <DependentUpon>Actionlearning.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrphanageVisit.cs">
+      <DependentUpon>Actionlearning.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\reqTable.cs">
-      <DependentUpon>ActionLearning.tt</DependentUpon>
+      <DependentUpon>Actionlearning.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionTable.cs">
+      <DependentUpon>Actionlearning.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -211,15 +215,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\ActionLearning.Context.tt">
+    <Content Include="Models\Actionlearning.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ActionLearning.edmx</DependentUpon>
-      <LastGenOutput>ActionLearning.Context.cs</LastGenOutput>
+      <LastGenOutput>Actionlearning.Context.cs</LastGenOutput>
+      <DependentUpon>Actionlearning.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\ActionLearning.tt">
+    <Content Include="Models\Actionlearning.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ActionLearning.edmx</DependentUpon>
-      <LastGenOutput>ActionLearning.cs</LastGenOutput>
+      <DependentUpon>Actionlearning.edmx</DependentUpon>
+      <LastGenOutput>Actionlearning.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -242,12 +246,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\ActionLearning.edmx">
+    <EntityDeploy Include="Models\Actionlearning.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ActionLearning.Designer.cs</LastGenOutput>
+      <LastGenOutput>Actionlearning.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ActionLearning.edmx.diagram">
-      <DependentUpon>ActionLearning.edmx</DependentUpon>
+    <Content Include="Models\Actionlearning.edmx.diagram">
+      <DependentUpon>Actionlearning.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

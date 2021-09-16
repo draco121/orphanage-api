@@ -4,11 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c369a4f753ad4916bffcde5743f7439e" Name="Diagram1">
-        <EntityTypeShape EntityType="ActionLearningModel.childRegisteration" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ActionLearningModel.orphanageRegistration1" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ActionLearningModel.reqTable" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="5804cba7741f489b952b965c031754d8" Name="Diagram1">
+        <EntityTypeShape EntityType="ActionLearningModel.childRegisteration" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActionLearningModel.orphanageRegistration1" Width="2" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActionLearningModel.reqTable" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <AssociationConnector Association="ActionLearningModel.FK_childRegisteration_orphanageRegistration1" ManuallyRouted="false" />
+        <AssociationConnector Association="ActionLearningModel.FK_reqTable_orphanageRegistration1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ActionLearningModel.TransactionTable" Width="1.5" PointX="3.5" PointY="8.25" />
+        <AssociationConnector Association="ActionLearningModel.FK_TransactionTable_orphanageRegistration1" />
+        <EntityTypeShape EntityType="ActionLearningModel.OrphanageVisit" Width="1.5" PointX="3.5" PointY="11.625" />
+        <AssociationConnector Association="ActionLearningModel.FK_OrphanageVisit_orphanageRegistration1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

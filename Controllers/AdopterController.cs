@@ -8,22 +8,26 @@ using System.Web.Http;
 
 namespace orphanage_api.Controllers
 {
-    public class RequirementController : ApiController
+    public class AdopterController : ApiController
     {
-        //[Route("api/orphanage/addRequirement")]
-        public IHttpActionResult PostRequirements(reqTable obj)
+        public IHttpActionResult Postregister(OrphanageVisit op)
         {
             using (var x = new ActionLearningEntities())
             {
                 try
                 {
-                    x.reqTables.Add(obj);
+                    /*if(x.orphanageRegistration1.Where(o => o.oId == op.oId) == null)
+                    {*/
+                    x.OrphanageVisits.Add(op);
                     x.SaveChanges();
                     return Ok();
+                    
+                    
+
                 }
                 catch (Exception e)
                 {
-                    return InternalServerError(e);
+                    return BadRequest(e.InnerException.Message);
                 }
             }
         }

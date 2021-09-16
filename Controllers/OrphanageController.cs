@@ -40,7 +40,7 @@ namespace orphanage_api.Controllers
 
         }
         [Route("api/orphanage/login")]
-        public IHttpActionResult PostLogin(LoginModel obj)
+        public IHttpActionResult PostLogin(orphanageRegistration1 obj)
         {
             orphanageRegistration1 result = new orphanageRegistration1();
             var x = new ActionLearningEntities();
@@ -72,7 +72,7 @@ namespace orphanage_api.Controllers
             }
         }
 
-        [Route("api/orphanage/orphanagebyid")]
+        [Route("api/orphanage/orphanagebyid/{id}")]
         public IHttpActionResult Getorphanagebyid(int id)
         {
             orphanageRegistration1 result = new orphanageRegistration1();
@@ -84,7 +84,7 @@ namespace orphanage_api.Controllers
             }
         }
 
-        [Route("api/orphanage/children")]
+        [Route("api/orphanage/children/{id}")]
         public IHttpActionResult GetChildren(int id)
         {
             List<childRegisteration> res = new List<childRegisteration>();
@@ -95,7 +95,7 @@ namespace orphanage_api.Controllers
             }
         }
 
-        [Route("api/orphanage/childrenbyid")]
+        [Route("api/orphanage/childrenbyid/{id}")]
         public IHttpActionResult GetChildrenbyid(int id)
         {
             childRegisteration res = new childRegisteration();
@@ -133,23 +133,25 @@ namespace orphanage_api.Controllers
             }
         }
 
-        /*[Route("api/orphanage/addRequirement")]
-        public IHttpActionResult PostRequirements(reqTable obj)
-        {
-            using (var x = new ActionLearningEntities())
-            {
-                try
-                {
-                    x.reqTables.Add(obj);
-                    x.SaveChanges();
-                    return Ok();
-                }
-                catch (Exception e)
-                {
-                    return InternalServerError(e);
-                }
-            }
-        /}*/
+        
+
+        //[Route("api/orphanage/addRequirement")]
+        //public IHttpActionResult PostRequirements(reqTable obj)
+        //{
+        //    using (var x = new ActionLearningEntities())
+        //    {
+        //        try
+        //        {
+        //            x.reqTables.Add(obj);
+        //            x.SaveChanges();
+        //            return Ok();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            return InternalServerError(e);
+        //        }
+        //    }
+        //}
 
     }
 }
