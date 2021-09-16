@@ -10,13 +10,15 @@ namespace orphanage_api.Controllers
 {
     public class RequirementController : ApiController
     {
-        //[Route("api/orphanage/addRequirement")]
+        [Route("api/orphanage/addRequirement")]
         public IHttpActionResult PostRequirements(reqTable obj)
         {
             using (var x = new ActionLearningEntities())
             {
                 try
                 {
+                    obj.date = DateTime.Now;
+                    obj.Id = Guid.NewGuid().ToString();
                     x.reqTables.Add(obj);
                     x.SaveChanges();
                     return Ok();

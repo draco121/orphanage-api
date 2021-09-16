@@ -173,36 +173,36 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Actionlearning.Context.cs">
+    <Compile Include="Models\ActionLearning.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Actionlearning.Context.tt</DependentUpon>
+      <DependentUpon>ActionLearning.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Actionlearning.cs">
+    <Compile Include="Models\ActionLearning.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Actionlearning.tt</DependentUpon>
+      <DependentUpon>ActionLearning.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Actionlearning.Designer.cs">
+    <Compile Include="Models\ActionLearning.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Actionlearning.edmx</DependentUpon>
+      <DependentUpon>ActionLearning.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\childRegisteration.cs">
-      <DependentUpon>Actionlearning.tt</DependentUpon>
+      <DependentUpon>ActionLearning.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Orphanage.cs" />
     <Compile Include="Models\orphanageRegistration1.cs">
-      <DependentUpon>Actionlearning.tt</DependentUpon>
+      <DependentUpon>ActionLearning.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrphanageVisit.cs">
-      <DependentUpon>Actionlearning.tt</DependentUpon>
+      <DependentUpon>ActionLearning.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\reqTable.cs">
-      <DependentUpon>Actionlearning.tt</DependentUpon>
+      <DependentUpon>ActionLearning.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TransactionTable.cs">
-      <DependentUpon>Actionlearning.tt</DependentUpon>
+      <DependentUpon>ActionLearning.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -215,15 +215,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Actionlearning.Context.tt">
+    <Content Include="Models\ActionLearning.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Actionlearning.Context.cs</LastGenOutput>
-      <DependentUpon>Actionlearning.edmx</DependentUpon>
+      <DependentUpon>ActionLearning.edmx</DependentUpon>
+      <LastGenOutput>ActionLearning.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Actionlearning.tt">
+    <Content Include="Models\ActionLearning.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Actionlearning.edmx</DependentUpon>
-      <LastGenOutput>Actionlearning.cs</LastGenOutput>
+      <DependentUpon>ActionLearning.edmx</DependentUpon>
+      <LastGenOutput>ActionLearning.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -246,12 +246,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\Actionlearning.edmx">
+    <EntityDeploy Include="Models\ActionLearning.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Actionlearning.Designer.cs</LastGenOutput>
+      <LastGenOutput>ActionLearning.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Actionlearning.edmx.diagram">
-      <DependentUpon>Actionlearning.edmx</DependentUpon>
+    <Content Include="Models\ActionLearning.edmx.diagram">
+      <DependentUpon>ActionLearning.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

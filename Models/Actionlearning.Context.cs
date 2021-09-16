@@ -18,7 +18,6 @@ namespace orphanage_api.Models
         public ActionLearningEntities()
             : base("name=ActionLearningEntities")
         {
-            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -28,8 +27,8 @@ namespace orphanage_api.Models
     
         public virtual DbSet<childRegisteration> childRegisterations { get; set; }
         public virtual DbSet<orphanageRegistration1> orphanageRegistration1 { get; set; }
+        public virtual DbSet<OrphanageVisit> OrphanageVisits { get; set; }
         public virtual DbSet<reqTable> reqTables { get; set; }
         public virtual DbSet<TransactionTable> TransactionTables { get; set; }
-        public virtual DbSet<OrphanageVisit> OrphanageVisits { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace orphanage_api.Models
     
     public partial class TransactionTable
     {
-        public int tId { get; set; }
+        public string tId { get; set; }
         public int oId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }

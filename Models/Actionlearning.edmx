@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ActionLearningModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ActionLearningModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="childRegisteration">
           <Key>
             <PropertyRef Name="CId" />
@@ -50,18 +50,20 @@
         </EntityType>
         <EntityType Name="reqTable">
           <Key>
-            <PropertyRef Name="rId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="rId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="requirementName" Type="nvarchar" MaxLength="50" />
-          <Property Name="requirementStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="oId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TransactionTable">
           <Key>
             <PropertyRef Name="tId" />
           </Key>
-          <Property Name="tId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="oId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -87,18 +89,6 @@
               <PropertyRef Name="oId" />
             </Principal>
             <Dependent Role="OrphanageVisit">
-              <PropertyRef Name="oId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_reqTable_orphanageRegistration1">
-          <End Role="orphanageRegistration1" Type="Self.orphanageRegistration1" Multiplicity="1" />
-          <End Role="reqTable" Type="Self.reqTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="orphanageRegistration1">
-              <PropertyRef Name="oId" />
-            </Principal>
-            <Dependent Role="reqTable">
               <PropertyRef Name="oId" />
             </Dependent>
           </ReferentialConstraint>
@@ -129,16 +119,13 @@
             <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
             <End Role="OrphanageVisit" EntitySet="OrphanageVisit" />
           </AssociationSet>
-          <AssociationSet Name="FK_reqTable_orphanageRegistration1" Association="Self.FK_reqTable_orphanageRegistration1">
-            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
-            <End Role="reqTable" EntitySet="reqTable" />
-          </AssociationSet>
           <AssociationSet Name="FK_TransactionTable_orphanageRegistration1" Association="Self.FK_TransactionTable_orphanageRegistration1">
             <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
             <End Role="TransactionTable" EntitySet="TransactionTable" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ActionLearningModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -173,19 +160,44 @@
           <Property Name="phoneNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="childRegisterations" Relationship="Self.FK_childRegisteration_orphanageRegistration1" FromRole="orphanageRegistration1" ToRole="childRegisteration" />
-          <NavigationProperty Name="reqTables" Relationship="Self.FK_reqTable_orphanageRegistration1" FromRole="orphanageRegistration1" ToRole="reqTable" />
-          <NavigationProperty Name="TransactionTables" Relationship="ActionLearningModel.FK_TransactionTable_orphanageRegistration1" FromRole="orphanageRegistration1" ToRole="TransactionTable" />
-          <NavigationProperty Name="OrphanageVisits" Relationship="ActionLearningModel.FK_OrphanageVisit_orphanageRegistration1" FromRole="orphanageRegistration1" ToRole="OrphanageVisit" />
+          <NavigationProperty Name="OrphanageVisits" Relationship="Self.FK_OrphanageVisit_orphanageRegistration1" FromRole="orphanageRegistration1" ToRole="OrphanageVisit" />
+          <NavigationProperty Name="TransactionTables" Relationship="Self.FK_TransactionTable_orphanageRegistration1" FromRole="orphanageRegistration1" ToRole="TransactionTable" />
+        </EntityType>
+        <EntityType Name="OrphanageVisit">
+          <Key>
+            <PropertyRef Name="aId" />
+          </Key>
+          <Property Name="aId" Type="Guid" Nullable="false" />
+          <Property Name="aName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="aAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="aContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="aCurrenntDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="aScheduleDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="aScheduleTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="oId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="orphanageRegistration1" Relationship="Self.FK_OrphanageVisit_orphanageRegistration1" FromRole="OrphanageVisit" ToRole="orphanageRegistration1" />
         </EntityType>
         <EntityType Name="reqTable">
           <Key>
-            <PropertyRef Name="rId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="rId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="requirementName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="requirementStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="oId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="orphanageRegistration1" Relationship="Self.FK_reqTable_orphanageRegistration1" FromRole="reqTable" ToRole="orphanageRegistration1" />
+        </EntityType>
+        <EntityType Name="TransactionTable">
+          <Key>
+            <PropertyRef Name="tId" />
+          </Key>
+          <Property Name="tId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="oId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="orphanageRegistration1" Relationship="Self.FK_TransactionTable_orphanageRegistration1" FromRole="TransactionTable" ToRole="orphanageRegistration1" />
         </EntityType>
         <Association Name="FK_childRegisteration_orphanageRegistration1">
           <End Role="orphanageRegistration1" Type="Self.orphanageRegistration1" Multiplicity="0..1" />
@@ -199,81 +211,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_reqTable_orphanageRegistration1">
-          <End Role="orphanageRegistration1" Type="Self.orphanageRegistration1" Multiplicity="1" />
-          <End Role="reqTable" Type="Self.reqTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="orphanageRegistration1">
-              <PropertyRef Name="oId" />
-            </Principal>
-            <Dependent Role="reqTable">
-              <PropertyRef Name="oId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="ActionLearningEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="childRegisterations" EntityType="Self.childRegisteration" />
-          <EntitySet Name="orphanageRegistration1" EntityType="Self.orphanageRegistration1" />
-          <EntitySet Name="reqTables" EntityType="Self.reqTable" />
-          <AssociationSet Name="FK_childRegisteration_orphanageRegistration1" Association="Self.FK_childRegisteration_orphanageRegistration1">
-            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
-            <End Role="childRegisteration" EntitySet="childRegisterations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_reqTable_orphanageRegistration1" Association="Self.FK_reqTable_orphanageRegistration1">
-            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
-            <End Role="reqTable" EntitySet="reqTables" />
-          </AssociationSet>
-          <EntitySet Name="TransactionTables" EntityType="ActionLearningModel.TransactionTable" />
-          <AssociationSet Name="FK_TransactionTable_orphanageRegistration1" Association="ActionLearningModel.FK_TransactionTable_orphanageRegistration1">
-            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
-            <End Role="TransactionTable" EntitySet="TransactionTables" />
-          </AssociationSet>
-          <EntitySet Name="OrphanageVisits" EntityType="ActionLearningModel.OrphanageVisit" />
-          <AssociationSet Name="FK_OrphanageVisit_orphanageRegistration1" Association="ActionLearningModel.FK_OrphanageVisit_orphanageRegistration1">
-            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
-            <End Role="OrphanageVisit" EntitySet="OrphanageVisits" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="TransactionTable">
-          <Key>
-            <PropertyRef Name="tId" />
-          </Key>
-          <Property Name="tId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="oId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <NavigationProperty Name="orphanageRegistration1" Relationship="ActionLearningModel.FK_TransactionTable_orphanageRegistration1" FromRole="TransactionTable" ToRole="orphanageRegistration1" />
-        </EntityType>
-        <Association Name="FK_TransactionTable_orphanageRegistration1">
-          <End Type="ActionLearningModel.orphanageRegistration1" Role="orphanageRegistration1" Multiplicity="1" />
-          <End Type="ActionLearningModel.TransactionTable" Role="TransactionTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="orphanageRegistration1">
-              <PropertyRef Name="oId" />
-            </Principal>
-            <Dependent Role="TransactionTable">
-              <PropertyRef Name="oId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="OrphanageVisit">
-          <Key>
-            <PropertyRef Name="aId" />
-          </Key>
-          <Property Name="aId" Type="Guid" Nullable="false" />
-          <Property Name="aName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="aAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="aContactNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="aCurrenntDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="aScheduleDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="aScheduleTime" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="oId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="orphanageRegistration1" Relationship="ActionLearningModel.FK_OrphanageVisit_orphanageRegistration1" FromRole="OrphanageVisit" ToRole="orphanageRegistration1" />
-        </EntityType>
         <Association Name="FK_OrphanageVisit_orphanageRegistration1">
-          <End Type="ActionLearningModel.orphanageRegistration1" Role="orphanageRegistration1" Multiplicity="1" />
-          <End Type="ActionLearningModel.OrphanageVisit" Role="OrphanageVisit" Multiplicity="*" />
+          <End Role="orphanageRegistration1" Type="Self.orphanageRegistration1" Multiplicity="1" />
+          <End Role="OrphanageVisit" Type="Self.OrphanageVisit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="orphanageRegistration1">
               <PropertyRef Name="oId" />
@@ -283,6 +223,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TransactionTable_orphanageRegistration1">
+          <End Role="orphanageRegistration1" Type="Self.orphanageRegistration1" Multiplicity="1" />
+          <End Role="TransactionTable" Type="Self.TransactionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orphanageRegistration1">
+              <PropertyRef Name="oId" />
+            </Principal>
+            <Dependent Role="TransactionTable">
+              <PropertyRef Name="oId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ActionLearningEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="childRegisterations" EntityType="Self.childRegisteration" />
+          <EntitySet Name="orphanageRegistration1" EntityType="Self.orphanageRegistration1" />
+          <EntitySet Name="OrphanageVisits" EntityType="Self.OrphanageVisit" />
+          <EntitySet Name="reqTables" EntityType="Self.reqTable" />
+          <EntitySet Name="TransactionTables" EntityType="Self.TransactionTable" />
+          <AssociationSet Name="FK_childRegisteration_orphanageRegistration1" Association="Self.FK_childRegisteration_orphanageRegistration1">
+            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
+            <End Role="childRegisteration" EntitySet="childRegisterations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrphanageVisit_orphanageRegistration1" Association="Self.FK_OrphanageVisit_orphanageRegistration1">
+            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
+            <End Role="OrphanageVisit" EntitySet="OrphanageVisits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionTable_orphanageRegistration1" Association="Self.FK_TransactionTable_orphanageRegistration1">
+            <End Role="orphanageRegistration1" EntitySet="orphanageRegistration1" />
+            <End Role="TransactionTable" EntitySet="TransactionTables" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -321,12 +292,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrphanageVisits">
+            <EntityTypeMapping TypeName="ActionLearningModel.OrphanageVisit">
+              <MappingFragment StoreEntitySet="OrphanageVisit">
+                <ScalarProperty Name="aId" ColumnName="aId" />
+                <ScalarProperty Name="aName" ColumnName="aName" />
+                <ScalarProperty Name="aAddress" ColumnName="aAddress" />
+                <ScalarProperty Name="aContactNumber" ColumnName="aContactNumber" />
+                <ScalarProperty Name="aCurrenntDate" ColumnName="aCurrenntDate" />
+                <ScalarProperty Name="aScheduleDate" ColumnName="aScheduleDate" />
+                <ScalarProperty Name="aScheduleTime" ColumnName="aScheduleTime" />
+                <ScalarProperty Name="oId" ColumnName="oId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="reqTables">
             <EntityTypeMapping TypeName="ActionLearningModel.reqTable">
               <MappingFragment StoreEntitySet="reqTable">
-                <ScalarProperty Name="rId" ColumnName="rId" />
-                <ScalarProperty Name="requirementName" ColumnName="requirementName" />
-                <ScalarProperty Name="requirementStatus" ColumnName="requirementStatus" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="oId" ColumnName="oId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -334,25 +321,11 @@
           <EntitySetMapping Name="TransactionTables">
             <EntityTypeMapping TypeName="ActionLearningModel.TransactionTable">
               <MappingFragment StoreEntitySet="TransactionTable">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="oId" ColumnName="oId" />
                 <ScalarProperty Name="tId" ColumnName="tId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrphanageVisits">
-            <EntityTypeMapping TypeName="ActionLearningModel.OrphanageVisit">
-              <MappingFragment StoreEntitySet="OrphanageVisit">
                 <ScalarProperty Name="oId" ColumnName="oId" />
-                <ScalarProperty Name="aScheduleTime" ColumnName="aScheduleTime" />
-                <ScalarProperty Name="aScheduleDate" ColumnName="aScheduleDate" />
-                <ScalarProperty Name="aCurrenntDate" ColumnName="aCurrenntDate" />
-                <ScalarProperty Name="aContactNumber" ColumnName="aContactNumber" />
-                <ScalarProperty Name="aAddress" ColumnName="aAddress" />
-                <ScalarProperty Name="aName" ColumnName="aName" />
-                <ScalarProperty Name="aId" ColumnName="aId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
