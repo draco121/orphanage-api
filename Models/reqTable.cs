@@ -14,11 +14,22 @@ namespace orphanage_api.Models
     
     public partial class reqTable
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public reqTable()
+        {
+            this.TransactionTables = new HashSet<TransactionTable>();
+        }
+    
         public string Id { get; set; }
-        public int amount { get; set; }
+        public Nullable<decimal> amount { get; set; }
         public string description { get; set; }
         public string status { get; set; }
         public System.DateTime date { get; set; }
         public int oId { get; set; }
+        public Nullable<decimal> Deposited { get; set; }
+    
+        public virtual orphanageRegistration1 orphanageRegistration1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransactionTable> TransactionTables { get; set; }
     }
 }

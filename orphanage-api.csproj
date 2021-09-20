@@ -163,6 +163,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdopterController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DonorController.cs" />
     <Compile Include="Controllers\HelpingHandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Models\childRegisteration.cs">
       <DependentUpon>ActionLearning.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\frontpageres.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Orphanage.cs" />
     <Compile Include="Models\orphanageRegistration1.cs">

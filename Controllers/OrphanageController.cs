@@ -20,21 +20,13 @@ namespace orphanage_api.Controllers
             {
                 try
                 {
-                    /*if(x.orphanageRegistration1.Where(o => o.oId == op.oId) == null)
-                    {*/
                         x.orphanageRegistration1.Add(op);
                         x.SaveChanges();
                         return Ok();
-                    //}
-                    /*else
-                    {
-                        return BadRequest("user exists");
-                    }*/
-                    
                 }
                 catch(Exception e)
                 {
-                    return BadRequest(e.ToString());
+                    return InternalServerError(e);
                 }
             }
 
@@ -43,28 +35,26 @@ namespace orphanage_api.Controllers
         public IHttpActionResult PostLogin(LoginModel obj)
         {
             orphanageRegistration1 result = new orphanageRegistration1();
-            var x = new ActionLearningEntities();
-
-            // x.Configuration.ProxyCreationEnabled = false;
-            try
+            using (var x = new ActionLearningEntities())
             {
-            result = x.orphanageRegistration1.Where(a => a.oRegistrationNum.Equals(obj.oRegistrationNum) && a.password.Equals(obj.Password)).FirstOrDefault();
-                            //return Ok(result);
+                try
+                {
+                    result = x.orphanageRegistration1.Where(a => a.oRegistrationNum.Equals(obj.oRegistrationNum) && a.password.Equals(obj.Password)).FirstOrDefault();
 
-                            if (result != null)
-                            {
-                                return Ok(result);
-                            }
-                            else
-                            {
-                                return NotFound();
-                            }
-            }catch(Exception e)
-            {
-                return Ok(e.ToString());
-            }
-            
-            
+                    if (result != null)
+                    {
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
+            }  
         }
 
         [Route("api/orphanage/allorphanage")]
@@ -73,9 +63,23 @@ namespace orphanage_api.Controllers
             List<orphanageRegistration1> result = new List<orphanageRegistration1>();
             using (var x = new ActionLearningEntities())
             {
-                x.Configuration.ProxyCreationEnabled = false;
-                result = x.orphanageRegistration1.ToList();
-                return Ok(result);
+                try
+                {
+                    result = x.orphanageRegistration1.ToList();
+                    if (result.Count > 0)
+                    {
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                    
+                }catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
+                
             }
         }
 
@@ -86,8 +90,24 @@ namespace orphanage_api.Controllers
 
             using(var x = new ActionLearningEntities())
             {
-                result = x.orphanageRegistration1.Where(op => op.oId == id).FirstOrDefault();
-                return Ok(result);
+                try
+                {
+                    result = x.orphanageRegistration1.Where(op => op.oId == id).FirstOrDefault();
+                    if(result != null)
+                    {
+                        result.password = "";
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                    
+                }catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
+                
             }
         }
 
@@ -97,8 +117,23 @@ namespace orphanage_api.Controllers
             List<childRegisteration> res = new List<childRegisteration>();
             using (var x = new ActionLearningEntities())
             {
-                res = x.childRegisterations.Where(c => c.oId == id).ToList();
-                return Ok(res);
+                try
+                {
+                    res = x.childRegisterations.Where(c => c.oId == id).ToList();
+                    if (res.Count > 0)
+                    {
+                        return Ok(res);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                    
+                }catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
+                
             }
         }
 
@@ -113,11 +148,11 @@ namespace orphanage_api.Controllers
                     res = x.childRegisterations.Where(c => c.CId == id).FirstOrDefault();
                     if(res !=null)
                     return Ok(res);
-
+                    else
                     return NotFound();
                 }catch (Exception e)
                 {
-                    return BadRequest(e.ToString());
+                    return InternalServerError(e);
                 }
                 
             }
@@ -139,26 +174,6 @@ namespace orphanage_api.Controllers
                 }
             }
         }
-
-        
-
-        //[Route("api/orphanage/addRequirement")]
-        //public IHttpActionResult PostRequirements(reqTable obj)
-        //{
-        //    using (var x = new ActionLearningEntities())
-        //    {
-        //        try
-        //        {
-        //            x.reqTables.Add(obj);
-        //            x.SaveChanges();
-        //            return Ok();
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            return InternalServerError(e);
-        //        }
-        //    }
-        //}
 
     }
 }

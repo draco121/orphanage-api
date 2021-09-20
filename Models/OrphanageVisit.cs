@@ -19,8 +19,8 @@ namespace orphanage_api.Models
         public string aAddress { get; set; }
         public string aContactNumber { get; set; }
         public System.DateTime aCurrenntDate { get; set; }
-        public string aScheduleDate { get; set; }
-        public string aScheduleTime { get; set; }
+        public System.DateTime aScheduleDate { get; set; }
+        public System.DateTime aScheduleTime { get; set; }
         public int oId { get; set; }
     
         public virtual orphanageRegistration1 orphanageRegistration1 { get; set; }

@@ -20,12 +20,20 @@ namespace orphanage_api.Controllers
                 using (var x = new ActionLearningEntities())
                 {
                     res = x.reqTables.Where(c => c.oId == id).ToList();
-                    return Ok(res);
+                    if(res.Count()>0)
+                    {
+                       return Ok(res);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                    
                 }
             }
             catch(Exception e)
             {
-                return Ok(e.ToString());
+                return InternalServerError(e);
             }
             
         }

@@ -17,19 +17,50 @@ namespace orphanage_api.Controllers
             List<orphanageRegistration1> result = new List<orphanageRegistration1>();
             using (var x = new ActionLearningEntities())
             {
-                x.Configuration.ProxyCreationEnabled = false;
-                result = x.orphanageRegistration1.ToList();
-                return Ok(result);
+                try
+                {   
+                    result = x.orphanageRegistration1.ToList();
+                    if(result.Count > 0)
+                    {
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                    
+                }catch( Exception e)
+                {
+                    return InternalServerError(e);
+                }
+                
             }
         }
+
+
         [Route("api/helpinghand/getRequirement/{id}")]
         public IHttpActionResult GetRequirement(int id)
         {
             List<reqTable> res = new List<reqTable>();
             using (var x = new ActionLearningEntities())
             {
-                res = x.reqTables.Where(c => c.oId == id).ToList();
-                return Ok(res);
+                try
+                {
+                    res = x.reqTables.Where(c => c.oId == id).ToList();
+                    if (res.Count > 0)
+                    {
+                        return Ok(res);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                    
+                } catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
+                
             }
         }
     }

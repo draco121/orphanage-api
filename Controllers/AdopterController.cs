@@ -16,18 +16,14 @@ namespace orphanage_api.Controllers
             {
                 try
                 {
-                    /*if(x.orphanageRegistration1.Where(o => o.oId == op.oId) == null)
-                    {*/
                     x.OrphanageVisits.Add(op);
                     x.SaveChanges();
-                    return Ok();
-                    
-                    
+                    return Ok();    
 
                 }
                 catch (Exception e)
                 {
-                    return BadRequest(e.InnerException.Message);
+                    return InternalServerError(e);
                 }
             }
         }

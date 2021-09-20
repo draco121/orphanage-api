@@ -20,6 +20,7 @@ namespace orphanage_api.Models
             this.childRegisterations = new HashSet<childRegisteration>();
             this.OrphanageVisits = new HashSet<OrphanageVisit>();
             this.TransactionTables = new HashSet<TransactionTable>();
+            this.reqTables = new HashSet<reqTable>();
         }
     
         public int oId { get; set; }
@@ -41,5 +42,7 @@ namespace orphanage_api.Models
         public virtual ICollection<OrphanageVisit> OrphanageVisits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionTable> TransactionTables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<reqTable> reqTables { get; set; }
     }
 }

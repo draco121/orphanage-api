@@ -19,7 +19,10 @@ namespace orphanage_api.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public decimal Amount { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+        public string rId { get; set; }
     
         public virtual orphanageRegistration1 orphanageRegistration1 { get; set; }
+        public virtual reqTable reqTable { get; set; }
     }
 }
